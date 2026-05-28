@@ -1,0 +1,66 @@
+# models/marts/schema.yml
+# ========================
+# Define tests and documentation for your mart models
+# Run with: dbt test --profiles-dir .
+
+version: 2
+
+models:
+
+  # ── FACT TABLE TESTS ─────────────────────────────────────────
+  - name: fct_your_mart
+    description: "Your fact table description — what does each row represent?"
+
+    columns:
+      # Primary key — must always be unique and not null
+      - name: id_column
+        description: "Unique identifier for each record"
+        tests:
+          - unique
+          - not_null
+
+      # Date column — must not be null
+      - name: date_column
+        description: "Date the record was created"
+        tests:
+          - not_null
+
+      # Status column — must match accepted values
+      - name: status
+        description: "Record status"
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['COMPLETED', 'PENDING', 'CANCELLED']
+              # ← add your actual valid values
+
+      # Revenue — must not be null, should be positive
+      - name: revenue
+        description: "Revenue amount in local currency"
+        tests:
+          - not_null
+
+      # Foreign key — must exist in reference table
+      - name: ref_id
+        description: "Foreign key to reference table"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_your_reference_table')
+              field: id_column
+
+  # ── SUMMARY MART TESTS ───────────────────────────────────────
+  - name: mart_your_summary
+    description: "Pre-calculated summary KPIs — one row per group"
+
+    columns:
+      - name: group_column
+        description: "The grouping column (rep, region, product)"
+        tests:
+          - unique
+          - not_null
+
+      - name: total_revenue
+        description: "Sum of revenue for this group"
+        tests:
+          - not_null

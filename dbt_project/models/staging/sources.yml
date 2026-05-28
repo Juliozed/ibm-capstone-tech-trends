@@ -1,0 +1,28 @@
+# models/staging/sources.yml
+# ===========================
+# Define your raw source tables here
+# dbt uses this to resolve {{ source() }} references
+# and generate lineage documentation
+
+version: 2
+
+sources:
+  - name: your_source           # ← matches {{ source('your_source', ...) }}
+    description: "Raw data from your source system"
+    database: your_database     # ← your PostgreSQL/Snowflake database name
+    schema: public              # ← schema where raw tables live
+
+    tables:
+      - name: your_main_table
+        description: "Main transactional table"
+
+      - name: your_reference_table_1
+        description: "Reference/lookup table"
+
+      - name: your_reference_table_2
+        description: "Another reference table"
+
+      # Add more tables as needed
+      # - name: customers
+      # - name: products
+      # - name: suppliers

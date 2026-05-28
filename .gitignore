@@ -1,0 +1,62 @@
+# ============================================================
+# .gitignore
+# Files and folders to NEVER commit to Git
+# ============================================================
+
+# ── CREDENTIALS & SECRETS ────────────────────────────────────
+.env
+*.env
+profiles.yml
+service_account.json
+*credentials*
+*secrets*
+
+# ── PYTHON ───────────────────────────────────────────────────
+venv/
+.venv/
+env/
+__pycache__/
+*.py[cod]
+*.pyo
+.Python
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+
+# ── JUPYTER ──────────────────────────────────────────────────
+.ipynb_checkpoints/
+
+# ── DBT ──────────────────────────────────────────────────────
+target/
+dbt_packages/
+logs/
+*.log
+
+# ── DATA FILES (raw data stays local) ───────────────────────
+data/raw/
+*.csv
+*.parquet
+*.feather
+*.pkl
+
+# ── REPORTS (generated files) ────────────────────────────────
+reports/*.xlsx
+reports/*.pdf
+reports/*.png
+*.xlsx
+*.pdf
+
+# ── OS FILES ─────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── VS CODE ──────────────────────────────────────────────────
+.vscode/settings.json
+
+# ── WHAT TO KEEP ─────────────────────────────────────────────
+# Keep these even if they match patterns above:
+!.env.example
+!data/processed/.gitkeep
+!reports/.gitkeep
